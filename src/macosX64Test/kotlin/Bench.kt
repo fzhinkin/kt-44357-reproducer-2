@@ -12,9 +12,7 @@ import kotlin.test.assertEquals
 // @SymbolName("strlen")
 // external fun strlen(ptr: CPointer<ByteVar>): ULong
 
-class Bench {
-    val original = "well-formed-utf8".repeat(128) // 2048 bytes
-    // val original = "😘️😂😀😝".repeat(128) // 19 bytes * 128 = 2432 bytes
+abstract class BenchBase(val original: String) {
     val originalBytes = original.encodeToByteArray()
     val range = 1..100000
 
@@ -113,3 +111,8 @@ class Bench {
         println("@@@ JustDecodeByteArray $avg us")
     }
 }
+class AsciiBench : BenchBase("well-formed-utf8".repeat(128) /* 2048 bytes */)
+// "😘️😂😀😝".repeat(128) does not work properly as it is, for some reason, so the string decoded from raw utf8
+class Utf8Bench : BenchBase(
+    byteArrayOf(-16, -97, -104, -104, -17, -72, -113, -16, -97, -104, -126, -16, -97, -104, -128, -16, -97, -104, -99)
+        .decodeToString().repeat(128) /* 19 bytes * 128 = 2432 bytes */)
