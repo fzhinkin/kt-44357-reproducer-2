@@ -12,6 +12,7 @@ import kotlin.test.assertEquals
 // @SymbolName("strlen")
 // external fun strlen(ptr: CPointer<ByteVar>): ULong
 
+// The test was taken from https://youtrack.jetbrains.com/issue/KT-44357
 abstract class BenchBase(val original: String) {
     val originalBytes = original.encodeToByteArray()
     val range = 1..100000
