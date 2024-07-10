@@ -29,7 +29,17 @@ jobs:
         with:
           java-version: '8'
           distribution: 'liberica'
-      - name: Check with Gradle
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-        with:
-          arguments:  check
+      - name: Check with Kotlin 1.4.20
+        run: |
+          ./gradlew -Pkotlin_version=1.4.20 clean linkDebugTestMacosX64
+          ./build/bin/macosX64/debugTest/test.kexe
+            - name: Check with Kotlin 1.4.20
+      - name: Check with Kotlin 1.5.20
+        run: |
+          ./gradlew -Pkotlin_version=1.5.20 clean linkDebugTestMacosX64
+          ./build/bin/macosX64/debugTest/test.kexe
+      - name: Check with Kotlin 1.6.20
+        run: |
+          ./gradlew -Pkotlin_version=1.6.20 clean linkDebugTestMacosX64
+          ./build/bin/macosX64/debugTest/test.kexe
+
