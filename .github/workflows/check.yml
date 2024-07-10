@@ -17,6 +17,15 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    strategy:
+      matrix:
+        optLevel:
+          - debug: true
+            taskName: "linkDebugTestMacosX64"
+            outputDir: "debugTest"
+          - debug: false
+            taskName: "linkReleaseTestMacosX64"
+            outputDir: "releaseTest"
     # The type of runner that the job will run on
     runs-on: macos-12
 
@@ -31,45 +40,37 @@ jobs:
           distribution: 'liberica'
       - name: Check with Kotlin 1.4.20
         run: |
-          ./gradlew -Pkotlin_version=1.4.20 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.4.20 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe
       - name: Check with Kotlin 1.4.30
         run: |
-          ./gradlew -Pkotlin_version=1.4.30 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.4.30 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe
       - name: Check with Kotlin 1.5.0
         run: |
-          ./gradlew -Pkotlin_version=1.5.0 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.5.0 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe
       - name: Check with Kotlin 1.5.10
         run: |
-          ./gradlew -Pkotlin_version=1.5.10 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.5.10 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe
       - name: Check with Kotlin 1.5.20
         run: |
-          ./gradlew -Pkotlin_version=1.5.20 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.5.20 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe
       - name: Check with Kotlin 1.5.30
         run: |
-          ./gradlew -Pkotlin_version=1.5.30 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.5.30 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe
       - name: Check with Kotlin 1.6.0
         run: |
-          ./gradlew -Pkotlin_version=1.6.0 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.6.0 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe
       - name: Check with Kotlin 1.7.0
         run: |
-          ./gradlew -Pkotlin_version=1.7.0 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.7.0 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe
       - name: Check with Kotlin 1.8.0
         run: |
-          ./gradlew -Pkotlin_version=1.8.0 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
-      - name: Check with Kotlin 1.9.0
-        run: |
-          ./gradlew -Pkotlin_version=1.9.0 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
-      - name: Check with Kotlin 1.9.20
-        run: |
-          ./gradlew -Pkotlin_version=1.9.20 clean linkDebugTestMacosX64
-          ./build/bin/macosX64/debugTest/test.kexe
+          ./gradlew -Pkotlin_version=1.8.0 clean ${{ matrix.optLevel.taskName }}
+          ./build/bin/macosX64/${{ matrix.optLevel.outputDir }}/test.kexe

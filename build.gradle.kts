@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+
 plugins {
     kotlin("multiplatform")
 }
@@ -18,7 +20,12 @@ kotlin {
         }
     }
 
-    macosX64() {
+    macosX64 {
+        binaries {
+            test(listOf(NativeBuildType.RELEASE)) {
+                optimized = true
+            }
+        }
     }
 }
 
