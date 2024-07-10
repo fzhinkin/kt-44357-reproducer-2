@@ -9,8 +9,8 @@ import kotlin.system.measureTimeMicros
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-@SymbolName("strlen")
-external fun strlen(ptr: CPointer<ByteVar>): ULong
+// @SymbolName("strlen")
+// external fun strlen(ptr: CPointer<ByteVar>): ULong
 
 class Bench {
     val original = "well-formed-utf8".repeat(128) // 2048 bytes
@@ -57,7 +57,7 @@ class Bench {
     }
 
     // MARK: Part 2 - Converting via ByteArray, and ByteArray UTF8 decoding performance
-
+/*
     @Test
     fun measureStrlenMemcpyThenDecodeByteArray() = memScoped {
         val ptr = originalBytes.toCValues().ptr
@@ -77,7 +77,7 @@ class Bench {
         }
         println("@@@ StrlenMemcpyThenDecodeByteArray $avg us")
     }
-
+*/
     @Test
     fun measureCopyToByteArrayThenDecodeByteArray() = memScoped {
         val ptr = originalBytes.toCValues().ptr

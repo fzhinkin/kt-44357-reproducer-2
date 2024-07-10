@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.4.20"
+    kotlin("multiplatform")
 }
 
 group = "org.jetbrains.kotlinx"
@@ -15,10 +15,6 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
             }
-        }
-        val appleMain by creating
-        val appleTest by creating {
-            dependsOn(commonTest)
         }
     }
 
